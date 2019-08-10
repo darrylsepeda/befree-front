@@ -28,9 +28,9 @@ class SignUp extends Component {
     return (
       <Formik
         initialValues={{
-          email: this.state.email,
-          password: this.state.password,
-          error: ""
+          email: "",
+          password: "",
+          name: ""
         }}
         onSubmit={(values, { setSubmitting }) => {
           api
@@ -101,7 +101,7 @@ class SignUp extends Component {
                   name="name"
                   type="text"
                   placeholder="Type your name"
-                  value={this.state.name}
+                  value={values.name}
                   ref={input => (this.name = input)}
                   onChange={ev => {
                     handleChange(ev);
@@ -119,7 +119,7 @@ class SignUp extends Component {
                   name="email"
                   type="text"
                   placeholder="Type your email"
-                  value={this.state.email}
+                  value={values.email}
                   ref={input => (this.email = input)}
                   onChange={ev => {
                     handleChange(ev);
