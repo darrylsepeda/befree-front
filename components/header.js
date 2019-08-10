@@ -33,8 +33,8 @@ function Header() {
           } md:flex flex flex-col md:flex-row items-center justify-center text-sm w-full md:w-auto`}
         >
           {[
-            { title: "Home", route: "/" },
-            { title: "About", route: "/about" }
+            { title: "Sign In", route: "/auth/signin" },
+            { title: "Sign Up", route: "/auth/signup" }
           ].map(navigationItem => (
             <li className="mt-3 md:mt-0 md:ml-6" key={navigationItem.title}>
               <Link href={navigationItem.route}>
