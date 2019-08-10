@@ -21,8 +21,8 @@ const mainSection = () => (
     <div className="w-full flex justify-center">
       <Link
         activeClass=""
-        className="text-red-400 px-4 py-1 border border-red-400 rounded-full cursor-pointer"
-        to="section1"
+        className="text-red-400 px-4 py-1 border border-red-400 rounded-full cursor-pointer hover:bg-red-400 hover:text-white"
+        to="about"
         spy={true}
         smooth={true}
         offset={-70}
