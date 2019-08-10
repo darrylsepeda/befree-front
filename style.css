@@ -30,7 +30,8 @@ body {
 }
 
 #subtitle,
-#description-home {
+#description-home,
+#error {
   animation: goin 1s;
 }
 
