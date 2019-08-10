@@ -1,5 +1,33 @@
 /* purgecss start ignore */
 @tailwind base;
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,700&display=swap");
+
+body {
+  text-rendering: optimizeLegibility !important;
+  box-sizing: border-box;
+  font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes goin {
+  from {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+#subtitle {
+  animation: goin 1s;
+}
+
+#description-home {
+  animation: goin 1s;
+}
+
 /* purgecss end ignore */
 
 @tailwind components;
