@@ -20,12 +20,22 @@ body {
   }
 }
 
-#subtitle {
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#subtitle,
+#description-home {
   animation: goin 1s;
 }
 
-#description-home {
-  animation: goin 1s;
+#section-auth {
+  animation: show 1s;
 }
 
 /* purgecss end ignore */
