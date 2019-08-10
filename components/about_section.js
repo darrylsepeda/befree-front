@@ -5,7 +5,7 @@ const aboutSection = () => (
   <Fragment>
     <main
       id="about"
-      className="flex flex-row max-w-4xl mx-auto p-4 md:px-8 md:py-16 md:mt-40 w-full"
+      className="flex flex-row max-w-4xl mx-auto p-4 md:px-8 md:py-16 md:my-40 w-full"
     >
       <div className="w-1/2 flex flex-col align-center justify-center">
         <p>
