@@ -4,4 +4,4 @@ const api = axios.create({
   baseURL: "https://befree-api-market.herokuapp.com"
 });
 
-return api;
+export default api;

@@ -7,7 +7,7 @@ class AuthLayout extends Component {
       <main className="bg-red-400 w-full h-screen flex justify-center items-center">
         <div
           id="section-auth"
-          className="bg-white rounded p-5 flex flex-col justify-center items-center"
+          className="bg-white rounded  flex flex-col justify-center items-center"
         >
           <div className="flex flex-row justify-between items-center m-10">
             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
