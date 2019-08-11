@@ -43,7 +43,8 @@ select:-webkit-autofill:focus {
 
 #subtitle,
 #description-home,
-#error {
+#error,
+#success {
   animation: goin 1s;
 }
 

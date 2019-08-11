@@ -3,7 +3,6 @@ import { Component, Fragment } from "react";
 import AuthLayout from "../../components/auth_layout";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
 
 import api from "../../services/api";
 
@@ -11,18 +10,10 @@ class SignUp extends Component {
   state = {
     name: "",
     password: "",
-    name: ""
+    name: "",
+    success: "",
+    error: ""
   };
-
-  success = () =>
-    toast.success("Registered Successfully", {
-      position: "top-right",
-      autoClose: 2500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true
-    });
 
   render() {
     return (
@@ -49,12 +40,12 @@ class SignUp extends Component {
             )
             .then(res => {
               console.log(res);
-              this.success();
+              this.setState({ success: "Registered successfully" });
               this.setState({ error: "" });
             })
             .catch(err => {
-              console.log(err);
-              this.setState({ error: "Was not possible to sign up" });
+              this.setState({ success: "" });
+              this.setState({ error: err.response.data.error });
             });
         }}
         validationSchema={Yup.object().shape({
@@ -80,18 +71,6 @@ class SignUp extends Component {
           } = props;
           return (
             <AuthLayout>
-              <ToastContainer
-                position="top-left"
-                autoClose={5000}
-                className="toast"
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnVisibilityChange
-                draggable
-                pauseOnHover
-              />
               <form
                 onSubmit={handleSubmit}
                 className="flex flex-col justify-center items-center"
@@ -148,6 +127,18 @@ class SignUp extends Component {
                 {errors.password && touched.password && (
                   <p id="error" className="text-red-500 font-bold ">
                     {errors.password}
+                  </p>
+                )}
+                {this.state.error ? (
+                  <p id="error" className="text-center font-bold text-red-500">
+                    {this.state.error}
+                  </p>
+                ) : (
+                  <p
+                    id="success"
+                    className="text-center font-bold text-green-400"
+                  >
+                    {this.state.success}
                   </p>
                 )}
                 <button

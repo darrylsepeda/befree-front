@@ -3,21 +3,47 @@ import AuthLayout from "../../components/auth_layout";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import api from "../../services/api";
+
 class SignIn extends Component {
   state = {
     name: "",
-    password: ""
+    password: "",
+    error: ""
   };
 
   render() {
     return (
       <Formik
         initialValues={{
-          email: this.state.email,
-          password: this.state.password
+          email: "",
+          password: ""
         }}
         onSubmit={(values, { setSubmitting }) => {
           console.log("submitting");
+
+          api
+            .post(
+              "/sessions",
+              {
+                email: this.email.value,
+                password: this.password.value
+              },
+              {
+                headers: {
+                  "Access-Control-Allow-Origin": "*"
+                }
+              }
+            )
+            .then(res => {
+              console.log(res.data.token);
+              console.log(res.data.user);
+              this.setState({ error: "" });
+            })
+            .catch(err => {
+              console.log(err);
+              this.setState({ error: err.response.data.error });
+            });
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string()
@@ -49,7 +75,8 @@ class SignIn extends Component {
                   className="focus:outline-none focus:border-red-400 p-2 m-4 border text-gray-700 border-gray-500 rounded"
                   name="email"
                   placeholder="Type your email"
-                  value={this.state.email}
+                  value={values.email}
+                  ref={input => (this.email = input)}
                   onChange={ev => {
                     handleChange(ev);
                     this.setState({ email: ev.target.value });
@@ -66,7 +93,8 @@ class SignIn extends Component {
                   type="password"
                   name="password"
                   placeholder="Type your password"
-                  value={this.state.password}
+                  value={values.password}
+                  ref={input => (this.password = input)}
                   onChange={ev => {
                     handleChange(ev);
                     this.setState({ password: ev.target.value });
@@ -76,6 +104,11 @@ class SignIn extends Component {
                 {errors.password && touched.password && (
                   <p id="error" className="text-red-500 font-bold ">
                     {errors.password}
+                  </p>
+                )}
+                {this.state.error && (
+                  <p id="error" className="text-center font-bold text-red-500">
+                    {this.state.error}
                   </p>
                 )}
                 <button
