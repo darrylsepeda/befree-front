@@ -23,7 +23,7 @@ class SignUp extends Component {
           password: "",
           name: ""
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           api
             .post(
               "/users",
@@ -46,6 +46,7 @@ class SignUp extends Component {
             .catch(err => {
               this.setState({ success: "" });
               this.setState({ error: err.response.data.error });
+              resetForm({});
             });
         }}
         validationSchema={Yup.object().shape({
@@ -98,7 +99,7 @@ class SignUp extends Component {
                   name="email"
                   type="text"
                   placeholder="Type your email"
-                  value={values.email}
+                  value={values.email || ""}
                   ref={input => (this.email = input)}
                   onChange={ev => {
                     handleChange(ev);
@@ -116,7 +117,7 @@ class SignUp extends Component {
                   type="password"
                   name="password"
                   placeholder="Type your password"
-                  value={this.state.password}
+                  value={this.state.password || ""}
                   ref={input => (this.password = input)}
                   onChange={ev => {
                     handleChange(ev);

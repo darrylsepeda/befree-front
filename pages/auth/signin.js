@@ -1,6 +1,7 @@
 import { Component } from "react";
 import AuthLayout from "../../components/auth_layout";
 import { Formik } from "formik";
+import { Router } from "../../routes";
 import * as Yup from "yup";
 
 import api from "../../services/api";
@@ -19,7 +20,7 @@ class SignIn extends Component {
           email: "",
           password: ""
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           console.log("submitting");
 
           api
@@ -39,10 +40,12 @@ class SignIn extends Component {
               console.log(res.data.token);
               console.log(res.data.user);
               this.setState({ error: "" });
+              Router.pushRoute("/ads");
             })
             .catch(err => {
               console.log(err);
               this.setState({ error: err.response.data.error });
+              resetForm({});
             });
         }}
         validationSchema={Yup.object().shape({
@@ -75,7 +78,7 @@ class SignIn extends Component {
                   className="focus:outline-none focus:border-red-400 p-2 m-4 border text-gray-700 border-gray-500 rounded"
                   name="email"
                   placeholder="Type your email"
-                  value={values.email}
+                  value={values.email || ""}
                   ref={input => (this.email = input)}
                   onChange={ev => {
                     handleChange(ev);
@@ -93,7 +96,7 @@ class SignIn extends Component {
                   type="password"
                   name="password"
                   placeholder="Type your password"
-                  value={values.password}
+                  value={values.password || ""}
                   ref={input => (this.password = input)}
                   onChange={ev => {
                     handleChange(ev);
