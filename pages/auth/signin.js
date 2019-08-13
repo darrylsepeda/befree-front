@@ -7,11 +7,14 @@ import * as Yup from "yup";
 import api from "../../services/api";
 
 class SignIn extends Component {
-  state = {
-    name: "",
-    password: "",
-    error: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      password: "",
+      error: ""
+    };
+  }
 
   render() {
     return (
@@ -39,8 +42,10 @@ class SignIn extends Component {
             .then(res => {
               //console.log(res.data.token);
               //console.log(res.data.user._id);
+
               localStorage.setItem("auth-token", res.data.token);
               localStorage.setItem("userId", res.data.user._id);
+
               this.setState({ error: "" });
               Router.pushRoute("/ads");
             })

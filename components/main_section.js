@@ -4,7 +4,7 @@ import { Fragment } from "react";
 const mainSection = () => (
   <Fragment>
     <main className="flex flex-col mt-20 items-center md:mx-auto md:flex-row max-w-4xl mx-auto p-4 md:px-8 md:py-16 w-full">
-      <div className="w-1/2 flex flex-col align-center justify-center">
+      <div className="w-1/2 mt-20 md:mt-0 flex flex-col align-center justify-center">
         <h2
           className="font-bold text-red-400 text-xl text-center md:text-left md:text-3xl"
           id="subtitle"
@@ -20,7 +20,7 @@ const mainSection = () => (
           Make happy money!{" "}
         </p>
       </div>
-      <div className="w-1/2 h-full">
+      <div className="w-1/2 h-full mt-5 md:mt-0">
         <img src="static/home.png" />
       </div>
     </main>
