@@ -4,7 +4,7 @@ import AuthLayout from "../../components/auth_layout";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import api from "../../services/api";
+import Api from "../../services/api";
 
 class SignUp extends Component {
   state = {
@@ -16,6 +16,8 @@ class SignUp extends Component {
   };
 
   render() {
+    const api = new Api();
+
     return (
       <Formik
         initialValues={{
@@ -25,19 +27,11 @@ class SignUp extends Component {
         }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           api
-            .post(
-              "/users",
-              {
-                email: this.email.value,
-                password: this.password.value,
-                name: this.name.value
-              },
-              {
-                headers: {
-                  "Access-Control-Allow-Origin": "*"
-                }
-              }
-            )
+            .user({
+              email: this.email.value,
+              password: this.password.value,
+              name: this.name.value
+            })
             .then(res => {
               console.log(res);
               this.setState({ success: "Registered successfully" });

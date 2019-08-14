@@ -7,9 +7,11 @@ class Ads extends Component {
   };
 
   componentDidMount() {
+    const as = "/";
+
     if (!localStorage.getItem("auth-token")) {
-      Router.push("/ads", "/");
-      //window.location.reload();
+      Router.push("/ads", as, { shallow: true });
+      return window.location.reload();
     }
   }
 

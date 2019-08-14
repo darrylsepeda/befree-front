@@ -16,6 +16,12 @@ class SignIn extends Component {
     };
   }
 
+  componentDidMount() {
+    if (localStorage.getItem("auth-token")) {
+      Router.push("/ads");
+    }
+  }
+
   render() {
     const api = new Api();
 
