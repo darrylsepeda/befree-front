@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import { Router } from "../../routes";
 import * as Yup from "yup";
 
-import api from "../../services/api";
+import Api from "../../services/api";
 
 class SignIn extends Component {
   constructor(props) {
@@ -17,6 +17,8 @@ class SignIn extends Component {
   }
 
   render() {
+    const api = new Api();
+
     return (
       <Formik
         initialValues={{
@@ -27,20 +29,12 @@ class SignIn extends Component {
           console.log("submitting");
 
           api
-            .post(
-              "/sessions",
-              {
-                email: this.email.value,
-                password: this.password.value
-              },
-              {
-                headers: {
-                  "Access-Control-Allow-Origin": "*"
-                }
-              }
-            )
+            .session({
+              email: this.email.value,
+              password: this.password.value
+            })
             .then(res => {
-              //console.log(res.data.token);
+              console.log(res.data.token);
               //console.log(res.data.user._id);
 
               localStorage.setItem("auth-token", res.data.token);

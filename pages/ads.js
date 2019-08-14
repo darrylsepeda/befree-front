@@ -9,6 +9,7 @@ class Ads extends Component {
   componentDidMount() {
     if (!localStorage.getItem("auth-token")) {
       Router.push("/ads", "/");
+      //window.location.reload();
     }
   }
 
