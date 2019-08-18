@@ -3,14 +3,26 @@ import { Router } from "../routes";
 import Link from "next/link";
 import "../style.css";
 
+import Api from "../services/api";
+
 class Ads extends Component {
   state = {
     isAuthenticated: false
   };
 
   componentDidMount() {
-    if (localStorage.getItem("auth-token")) {
+    const api = new Api();
+    const token = localStorage.getItem("auth-token");
+
+    if (token) {
       this.setState({ isAuthenticated: true });
+
+      const token = localStorage.getItem("auth-token");
+
+      api
+        .index(token)
+        .then(res => console.log(res.data.docs))
+        .catch(err => console.log(err));
     } else {
       this.setState({ isAuthenticated: false });
     }
