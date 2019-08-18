@@ -1,8 +1,11 @@
 import { Component } from "react";
 import AuthLayout from "../../components/auth_layout";
 import { Formik } from "formik";
+import { css } from "@emotion/core";
 import { Router } from "../../routes";
 import * as Yup from "yup";
+
+import { ClipLoader } from "react-spinners";
 
 import Api from "../../services/api";
 
@@ -12,7 +15,8 @@ class SignIn extends Component {
     this.state = {
       name: "",
       password: "",
-      error: ""
+      error: "",
+      loading: false
     };
   }
 
@@ -25,6 +29,12 @@ class SignIn extends Component {
   render() {
     const api = new Api();
 
+    const override = css`
+      display: block;
+      margin: 0 auto;
+      border-color: white;
+    `;
+
     return (
       <Formik
         initialValues={{
@@ -33,27 +43,34 @@ class SignIn extends Component {
         }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           console.log("submitting");
+          this.setState({ loading: true });
 
-          api
-            .session({
-              email: this.email.value,
-              password: this.password.value
-            })
-            .then(res => {
-              console.log(res.data.token);
-              //console.log(res.data.user._id);
+          try {
+            api
+              .session({
+                email: this.email.value,
+                password: this.password.value
+              })
+              .then(res => {
+                console.log(res.data.token);
+                //console.log(res.data.user._id);
 
-              localStorage.setItem("auth-token", res.data.token);
-              localStorage.setItem("userId", res.data.user._id);
+                localStorage.setItem("auth-token", res.data.token);
+                localStorage.setItem("userId", res.data.user._id);
 
-              this.setState({ error: "" });
-              Router.pushRoute("/ads");
-            })
-            .catch(err => {
-              console.log(err);
-              this.setState({ error: err.response.data.error });
-              resetForm({});
-            });
+                this.setState({ error: "" });
+                Router.pushRoute("/ads");
+              })
+              .catch(err => {
+                console.log(err);
+                this.setState({ error: err.response.data.error });
+                resetForm({});
+              });
+          } catch (err) {
+            console.log(err);
+          } finally {
+            this.setState({ loading: false });
+          }
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string()
@@ -126,8 +143,16 @@ class SignIn extends Component {
                   disabled={isSubmitting}
                   className="bg-red-400 m-4 hover:bg-red-500 border border-white px-5 py-2 text-white font-bold rounded"
                 >
-                  {" "}
-                  Sign in{" "}
+                  {this.state.loading ? (
+                    <ClipLoader
+                      css={override}
+                      sizeUnit={"px"}
+                      size={28}
+                      loading={this.state.loading}
+                    />
+                  ) : (
+                    "Sign in"
+                  )}
                 </button>
               </form>
             </AuthLayout>
