@@ -71,7 +71,7 @@ class SignUp extends Component {
                 className="flex flex-col justify-center items-center"
               >
                 <input
-                  className="focus:outline-none focus:border-red-400 p-2 m-4 border text-gray-700 border-gray-500 rounded"
+                  className="focus:outline-none shadow w-full focus:border-red-400 p-2 m-4 border text-gray-700 border-gray-500 rounded"
                   name="name"
                   type="text"
                   placeholder="Type your name"
@@ -89,7 +89,7 @@ class SignUp extends Component {
                   </p>
                 )}
                 <input
-                  className="focus:outline-none focus:border-red-400 p-2 m-4 border text-gray-700 border-gray-500 rounded"
+                  className="focus:outline-none shadow w-full focus:border-red-400 p-2 m-4 border text-gray-700 border-gray-500 rounded"
                   name="email"
                   type="text"
                   placeholder="Type your email"
@@ -107,7 +107,7 @@ class SignUp extends Component {
                   </p>
                 )}
                 <input
-                  className="focus:outline-none focus:border-red-400 p-2 m-4 border text-gray-700 border-gray-500 rounded"
+                  className="focus:outline-none shadow w-full focus:border-red-400 p-2 m-4 border text-gray-700 border-gray-500 rounded"
                   type="password"
                   name="password"
                   placeholder="Type your password"
