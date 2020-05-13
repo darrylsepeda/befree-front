@@ -1,6 +1,7 @@
 import { Component, Fragment } from "react";
-import { Router } from "../routes";
+// import { Router } from "../routes";
 import Link from "next/link";
+import Router from "next/router";
 import "../style.css";
 
 import Api from "../services/api";
@@ -25,6 +26,7 @@ class Ads extends Component {
         .catch(err => console.log(err));
     } else {
       this.setState({ isAuthenticated: false });
+      Router.push("/auth/signin")
     }
   }
 
